@@ -17,27 +17,27 @@ import util.CartLogic;
 @WebServlet("/AddCart")
 public class AddCart extends HttpServlet {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String id = request.getParameter("id");
+  @Override
+  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    request.setCharacterEncoding("UTF-8");
+    String id = request.getParameter("id");
 
-        HttpSession session = request.getSession();
+    HttpSession session = request.getSession();
 
-        CartDto cart = (CartDto) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new CartDto();
-        }
-
-        CarsDAO cd = new CarsDAO();
-
-        CarDto car = cd.getACar(id);
-
-        CartLogic logic = new CartLogic();
-        logic.execute(cart, car);
-
-        session.setAttribute("cart", cart);
-        request.setAttribute("message", car.getName() + "をカートに追加しました");
-        request.getRequestDispatcher("cart.jsp").forward(request, response);
+    CartDto cart = (CartDto) session.getAttribute("cart");
+    if (cart == null) {
+      cart = new CartDto();
     }
+
+    CarsDAO cd = new CarsDAO();
+
+    CarDto car = cd.getACar(id);
+
+    CartLogic logic = new CartLogic();
+    logic.execute(cart, car);
+
+    session.setAttribute("cart", cart);
+    request.setAttribute("message", car.getName() + "をカートに追加しました");
+    request.getRequestDispatcher("cart.jsp").forward(request, response);
+  }
 }
