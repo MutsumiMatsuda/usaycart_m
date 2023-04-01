@@ -30,6 +30,7 @@
                     <label for="pass">パスワード</label>
                     <input type="password" class="form-control" id="pass" name="pass" placeholder="パスワードを入れてください">
                 </div>
+                <input type="hidden" name="_token" value="${_token}"/>
                 <button type="submit" class="btn btn-primary" >ログイン</button>
                 <a href="regist.jsp">会員登録</a>
             </form>
